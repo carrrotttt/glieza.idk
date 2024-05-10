@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kumi</title>
+    <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap');
+
+        html, body {
+            margin:0;
+            padding:0;
+            width:100%;
+            height:100%;
+        }
+
+        body {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex-direction:column;
+            background: #555;
+        }
+
+        .cards-wrapper {
+            width:100%;
+            height:300px;
+            max-width:1200px;
+            overflow-x:hidden;
+            position:relative;
+        }
+
+        .cards {
+            position:absolute;
+            top:15px;
+            left:50%;
+            transform:translateX(-110px);
+            display:flex;
+            flex-direction:row;
+            width:1300px;
+            justify-content:space-between;
+        }
+
+        .card {
+            width:220px;
+            height:260px;
+            border-radius:14px;
+            border:none;
+            font-family: 'Open Sans', sans-serif;
+            cursor:pointer;
+            box-sizing:border-box;
+            color:#000;
+            overflow:hidden;
+            position: relative;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card h2 {
+            font-size:2.6em;
+            font-weight:300;
+            margin: 0; 
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .cards-wrapper::after {
+            content:'';
+            display:block;
+            position:absolute;
+            top:0;
+            width:100%;
+            max-width:1200px;
+            height:100%;
+            background:linear-gradient(90deg, #eee 0%, #ffffff00 30%, #ffffff00 70%, #eee 100%);
+            pointer-events:none;
+        }
+
+        .arrow-btn {
+            width:40px;
+            height:40px;
+            background:#fff;
+            border-radius:50%;
+            border:none;
+            box-shadow: 0 6px 8px #00000030;
+            position:absolute;
+            top:50%;
+            left:20px;
+            transform:translateY(-50%);
+            z-index:1000;
+            cursor:pointer;
+        }
+
+        .arrow-btn-next {
+            left:auto;
+            right:20px;
+        }
+
+        .arrow-btn svg {
+            fill:#333;
+            position:absolute;
+            height:80%;  
+            left:50%;
+            top:50%;
+            transform:translate(-60%,-50%);
+        }
+
+        .arrow-btn-next svg {
+            transform:translate(-40%,-50%);
+        }
+
+        .buy-button {
+            background-color: #333;
+            color: #fff;
+            border-radius: 20px;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.2em;
+            border: none;
+            outline: none;
+        }
+
+       footer {
+  background-color: #555;
+  color: #fff;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  line-height: 1.6;
+}
+
+footer p {
+  max-width: 200px;
+  margin: 0 auto;
+  line-height: 1.6;
+    </style>
+</head>
+<body>
+  
+    <div class='cards-wrapper'>
+        <div class='cards'>
+            <button class='card card1' tabindex="-1">
+                <img src="https://i.pinimg.com/736x/17/c5/df/17c5dff02755537edd3d65e03670b7b3.jpg" alt="Pic 1">
+                <h2></h2>
+            </button>
+            <button class='card card2' tabindex="-1">
+                <img src="https://s.alicdn.com/@sc04/kf/H98b51a8e920c40b8800df8ca06d9c6fe5.jpg_300x300.jpg" alt="Pic 2"> 
+                <h2></h2>   
+            </button>
+            <button class='card card3' tabindex="-1">
+                <img src="https://www.kaika.com.au/assets/thumbL/SEG01312.jpg?20231215084507" alt="Pic 3">
+                <h2></h2> 
+            </button> 
+            <button class='card card4' tabindex="-1">
+                <img src="https://japan-figure.com/cdn/shop/products/Sanrio-Kuromi-Plush-Toy-Magical-134309-Japan-Figure-4550337134306-0_512x512.jpg?v=1702910246" alt="Pic 4">
+                <h2></h2>  
+            </button>
+        </div>
+        
+        
+        <button class="arrow-btn arrow-btn-prev" tabindex="0" onclick="prevSlide()">
+            <svg viewBox="0 0 256 512">
+                <path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z" />
+            </svg>
+        </button>
+        <button class="arrow-btn arrow-btn-next" tabindex="0" onclick="nextSlide()">
+            <svg viewBox="0 0 256 512">
+                <path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z" />
+            </svg>
+        </button>
+    </div>
+    <button class="buy-button">Buy</button>
+<script src="/js/main.js"></script>
+    <script>
+        function nextSlide() {
+            var cards = document.querySelector('.cards');
+            cards.appendChild(cards.firstElementChild);
+        }
+
+        function prevSlide() {
+            var cards = document.querySelector('.cards');
+            cards.insertBefore(cards.lastElementChild, cards.firstElementChild);
+        }
+    </script>
+</body>
+</html>
